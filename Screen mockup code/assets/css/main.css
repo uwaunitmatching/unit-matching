@@ -222,6 +222,7 @@ a:after {
 
 /* Footer */
 #f {
+	margin-top: 40px;
 	padding-top: 20px;
 	background-color: #3276b1;
 }
