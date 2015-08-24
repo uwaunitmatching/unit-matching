@@ -1,0 +1,30 @@
+CREATE TABLE universitylist (
+	sch_id INT NOT NULL auto_increment,
+	sch_name varchar(80) NOT NULL,
+	country varchar(25) NOT NULL,
+	state varchar(25) NOT NULL,
+	region varchar(25) NOT NULL,
+	PRIMARY KEY (sch_id)
+) ENGINE = InnoDB;
+
+CREATE TABLE unitlist (
+	unit_key INT NOT NULL auto_increment,
+	unit_code varchar(20) NOT NULL,
+	unit_name varchar(300) NOT NULL,
+	unit_desc varchar(5000) NOT NULL,
+	unit_text varchar(300) NOT NULL,
+	ISBN INT NOT NULL,
+	FreeTags varchar(5000) NOT NULL,
+	Positive varchar(5000) NOT NULL,
+	sch_id INT NOT NULL,
+	PRIMARY KEY (unit_key)
+) ENGINE = InnoDB;
+
+INSERT into universitylist values (1, 'University of Western Australia', 'Australia', 'Western Australia', 'Nedlands');
+
+INSERT into unitlist values (1, 'CITS1402', 'Relational Database Management Systems [UG]', '', NULL, NULL, NULL, NULL, 1, 'http://www.unitoutlines.ecm.uwa.edu.au/Units/CITS1402/SEM-2/2015');
+
+INSERT into unitlist values (8, 'CS2102', 'Database Systems', '', NULL, NULL, NULL, NULL, 2, NULL);
+
+select *
+from unitlist join universitylist using (sch_id)
