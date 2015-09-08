@@ -14,7 +14,7 @@
 /* OVERALL ASPECT */
 
 body {
-  background-color: #f2f2f2;
+  background-color: #FFF720;
     font-family: "Lato";
     font-weight: 300;
     font-size: 16px;
@@ -97,7 +97,7 @@ a:after {
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
 	color: #ffffff;
-	background-color: #3276b1;
+	background-color: #000000;
 }
 
 .navbar-brand {
@@ -181,6 +181,9 @@ a:after {
 
 #searchbutton {
 	width:66%;
+	background-color: black;
+	border-color:black;
+	
 }
 
 /* Skills */
@@ -224,7 +227,7 @@ a:after {
 #f {
 	margin-top: 40px;
 	padding-top: 20px;
-	background-color: #3276b1;
+	background-color: #000000;
 }
 
 #f #poo p {
