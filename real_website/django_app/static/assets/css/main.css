@@ -246,6 +246,10 @@ li .active {
 	
 }
 
+.pagination {
+	padding-bottom:30px;
+}
+
 
 /* Image Opacity */
 .grid img {
