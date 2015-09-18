@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 def translate(webpage):
 	soup = BeautifulSoup(webpage, "html.parser")
-	language = soup.find('lang')#, lang=True)['lang']
+	language = soup.find('lang')#, lang=True)['lang'] #main error is here
 	if language != 'en' or language is None:
 		go = goslate.Goslate()
 		translated = go.translate(webpage, 'en')
