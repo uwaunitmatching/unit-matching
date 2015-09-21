@@ -26,18 +26,18 @@ SECRET_KEY = 'i0-!ia*=ij75x56-_1sx_5gn=m)^w(7p@&ohhbvs%8fl*^1w!3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = (
-    # 'django.contrib.admin',
-    # 'django.contrib.auth',
-    # 'django.contrib.contenttypes',
-    # 'django.contrib.sessions',
-    # 'django.contrib.messages',
-    # 'django.contrib.staticfiles',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
     'django_app',
 )
 
@@ -58,7 +58,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': ['/Users/Admin/Desktop/unit-matching/real_website/django_app/uniexchange/templates'],
-            # [os.path.join(os.path.dirname(__file__), 'templates').replace('\\', /)],
+             # [os.path.join(os.path.dirname(__file__), 'templates').replace('\\', /)],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,14 +78,14 @@ WSGI_APPLICATION = 'django_app.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'unitsdatabase',
-        'USER': 'b42b6658560e49',
-        'PASSWORD': '383daa65',
-        'HOST': 'ap-cdbr-azure-southeast-a.cloudapp.net',
-        'PORT': '',
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'unitsdatabase',
+    #     'USER': 'b42b6658560e49',
+    #     'PASSWORD': '383daa65',
+    #     'HOST': 'ap-cdbr-azure-southeast-a.cloudapp.net',
+    #     'PORT': '',
+    # }
 }
 
 
