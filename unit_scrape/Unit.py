@@ -4,6 +4,7 @@
 #
 import re
 import MySQLdb
+import DBconfig
 
 class Unit:
 
@@ -15,7 +16,7 @@ class Unit:
         print("        unit code is " + str(code).upper())
         self.unitcode = code
         self.description = ""
-        self.school = "NULL"
+        self.school = "181"
         
     #Title    
         
@@ -37,15 +38,18 @@ class Unit:
         print("        unit description is " + self.description)
         print("    adding unit to database")
         self.checkInfo()
-        database = MySQLdb.Connect("localhost","cheese","cheese","exchange_info")
-        cursor = database.cursor()
-        sql = "        INSERT INTO unitlist VALUES (NULL, " + self.school + ", \'" + self.unitcode + "\', \'" + self.unitpage + "\', \'" + self.title + "\', \'" + re.escape(self.description) + "\', NULL, NULL, NULL, NULL)"
+
         try:
-            print(sql)
+            database = MySQLdb.Connect(DBconfig.getIP(), DBconfig.getUser(), DBconfig.getPW(), DBconfig.getDBname() )
+            cursor = database.cursor()
+        except:
+            print("Error connecting\n")
+        sql = "        INSERT INTO unit_list VALUES (NULL, " + self.school + ", \'" + self.unitcode  + "\', \'" + self.title + "\', \'" + re.escape(self.description) + "\', NULL, NULL, NULL, NULL" + ", \'" + self.unitpage + "\')"
+        print(sql)
+        try:
             cursor.execute(sql)
             database.commit()
         except:
-            print("error")
-            database.rollback()
-        
+            print("error!!\n")
+        database.close();
         

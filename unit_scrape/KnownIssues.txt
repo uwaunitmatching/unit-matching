@@ -4,6 +4,8 @@
 5 push to stack before domain check
 6 This shit >>>
 
+7 Db config should be made user friendly
+
 [13649]attempting to scrape http://www.dur.ac.uk/choral.society/contactus
 error in http://www.dur.ac.uk/choral.society/contactus
 [13650]attempting to scrape http://www.dur.ac.uk/choral.society/contactus
