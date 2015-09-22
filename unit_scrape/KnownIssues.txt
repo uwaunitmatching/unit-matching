@@ -11,3 +11,26 @@ error in http://www.dur.ac.uk/choral.society/contactus
 [13650]attempting to scrape http://www.dur.ac.uk/choral.society/contactus
 error in http://www.dur.ac.uk/choral.society/contactus
 [13651]attempting to scrape http://www.dur.ac.uk/choral.society/contactus
+
+
+
+
+
+BUG REPORT
+
+
+BUG 1
+current domain is handbooks.uwa.edu.au
+[0]attempting to scrape http://handbooks.uwa.edu.au/
+Traceback (most recent call last):
+  File "/home/adrian/cits3200/unit-matching/unit_scrape/Main.py", line 35, in <module>
+    downTools.loadUrl(args.url, 0)  
+  File "/home/adrian/cits3200/unit-matching/unit_scrape/downTools.py", line 63, in loadUrl
+    parser.feed(line.decode('utf8'))
+  File "/usr/lib/python3.4/html/parser.py", line 165, in feed
+    self.goahead(0)
+  File "/usr/lib/python3.4/html/parser.py", line 216, in goahead
+    self.handle_data(rawdata[i:j])
+  File "/home/adrian/cits3200/unit-matching/unit_scrape/handleHTML.py", line 58, in handle_data
+    c = re.compile(self.unit.unitcode, re.IGNORECASE)
+AttributeError: 'parse' object has no attribute 'unit'

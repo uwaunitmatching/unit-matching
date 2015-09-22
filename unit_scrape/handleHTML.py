@@ -30,20 +30,23 @@ class parse(HTMLParser):
         return len(words)
     
     def handle_starttag(self, tag, attrs):
+        #print("here? tag is " + tag)
         a = re.compile("^http:", re.IGNORECASE)
         b = re.compile("^h\d$", re.IGNORECASE)
         if (tag == "a"):
+            #print("here2?")
             for name, value in attrs:
                 if name == "href":
                     if value not in self.visited:
                         if a.match(value):
                             self.stack.push(value)
-                        else: 
+                        else:
+                            #print ("pushing " + "http:" + value) 
                             self.stack.push("http:" + value)
         if (b.match(tag) and self.isUnit):
             #print("found " + tag + " tag" )
             self.record_titles = True
-        if (tag == "body"):
+        if (tag == "body" and self.isUnit):
             self.record_desc = True
             
     def handle_endtag(self, tag):
@@ -55,12 +58,13 @@ class parse(HTMLParser):
         
       
     def handle_data(self, data):
-        c = re.compile(self.unit.unitcode, re.IGNORECASE)
-        if (self.record_titles):
-            if (c.search(data)):
-                self.unit.addTitle(data)
-        if (self.record_desc and self.count_words(data) > 10):
-            self.unit.addDescription(data) 
+        if(self.isUnit):
+            c = re.compile(self.unit.unitcode, re.IGNORECASE)
+            if (self.record_titles):
+                if (c.search(data)):
+                    self.unit.addTitle(data)
+            if (self.record_desc and self.count_words(data) > 10):
+                self.unit.addDescription(data) 
             
     
         

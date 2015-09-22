@@ -37,19 +37,21 @@ class Unit:
     def insertUnit(self):
         print("        unit description is " + self.description)
         print("    adding unit to database")
-        self.checkInfo()
-
-        try:
-            database = MySQLdb.Connect(DBconfig.getIP(), DBconfig.getUser(), DBconfig.getPW(), DBconfig.getDBname() )
-            cursor = database.cursor()
-        except:
-            print("Error connecting\n")
         sql = "        INSERT INTO unit_list VALUES (NULL, " + self.school + ", \'" + self.unitcode  + "\', \'" + self.title + "\', \'" + re.escape(self.description) + "\', NULL, NULL, NULL, NULL" + ", \'" + self.unitpage + "\')"
         print(sql)
-        try:
-            cursor.execute(sql)
-            database.commit()
-        except:
-            print("error!!\n")
-        database.close();
+        self.checkInfo()
+
+#        try:
+#            database = MySQLdb.Connect(DBconfig.getIP(), DBconfig.getUser(), DBconfig.getPW(), DBconfig.getDBname() )
+#            cursor = database.cursor()
+#        except:
+#            print("Error connecting\n")
+#        
+
+#        try:
+#            cursor.execute(sql)
+#            database.commit()
+#        except:
+#            print("error!!\n")
+#        database.close();
         
