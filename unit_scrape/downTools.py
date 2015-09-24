@@ -8,8 +8,7 @@ from urllib.request import urlopen
 from urllib.error import  URLError
 import handleHTML
 from Stack import Stack
-from Unit import Unit
-import re
+
 
 #urls already visited
 visited = set()
@@ -18,8 +17,7 @@ stack = Stack()
 #parser object to manipulate HTML
 parser = handleHTML.parse()
 parser.re_init(stack, visited)
-#regex to match a unit in URL
-unitregex = re.compile("[a-z]{3,5}[0-9]{3,5}", re.IGNORECASE)
+
 
 #recursively load URL via stack
 
@@ -43,7 +41,7 @@ def loadUrl(url, count):
     print("[" + str(count) + "]" + "attempting to scrape " + url)
        
     try:
-        f = urlopen(url)
+        file = urlopen(url)
     except URLError as e:
         if hasattr(e, 'reason'):
             print('We failed to reach a server.')
@@ -52,27 +50,20 @@ def loadUrl(url, count):
             print('The server couldn\'t fulfill the request.')
             print('Error code: ', e.code)
     else:
-        if unitregex.search(url):
-            code = unitregex.search(url)
-            print("Unit Found!! building unit data")
-            parser.setUnitTrue()
-            buildUnit(url, code.group(0),f)
-        else:
-            parser.setUnitFalse()
-            for line in f:
-                parser.feed(line.decode('utf8'))
-                visited.add(url)
-        f.close()
+        visited.add(url)
+        parser.setUnitFalse()
+        buildUnit(url, file)
 
 #construct a table entry from unit web-page HTML
     
-def buildUnit(url, code, file):
-    thisUnit = Unit(url, code)
+def buildUnit(url, file):
+    parser.setUnitFalse()
     visited.add(url)
-    parser.set_unit(thisUnit)
+    parser.set_url(url)
     for line in file:
         parser.feed(line.decode('utf8'))
-    thisUnit.insertUnit()   
+    if parser.isUnit:
+        parser.unit.insertUnit()   
     
 #TODO
     

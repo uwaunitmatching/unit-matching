@@ -34,3 +34,44 @@ Traceback (most recent call last):
   File "/home/adrian/cits3200/unit-matching/unit_scrape/handleHTML.py", line 58, in handle_data
     c = re.compile(self.unit.unitcode, re.IGNORECASE)
 AttributeError: 'parse' object has no attribute 'unit'
+
+BUG 2
+[7]attempting to scrape http://www.au.dk/index.php?id=410443&orgUrl=http%3A%2F%2Fwww.au.dk%2Fvidenudveksling%2Fsamarbejde-med-skoler-og-gymnasier%2F&uuid=f6b678e3-6099-493d-9318-ad3ef8abe118
+Unit Found!! building unit data
+        unit webpage is http://www.au.dk/index.php?id=410443&orgUrl=http%3A%2F%2Fwww.au.dk%2Fvidenudveksling%2Fsamarbejde-med-skoler-og-gymnasier%2F&uuid=f6b678e3-6099-493d-9318-ad3ef8abe118
+        unit code is ABE118
+        unit description is Aarhus Universitet satser på tværgående forskning med rod i stærk faglighed.
+				var options = {
+					script:"?max=10&site=au-dk_collection&client=test_frontend_dk&access=p&format=rich&gsahost=http://ausearch.cs.au.dk&eID=google_suggestions&",
+					varname:"q",
+					json:true,
+					GSformName: "gsa_form",
+					shownoresults:false,
+					noresults: "Ingen resultater",
+					cache: false
+				};
+				var as_json = new AutoSuggest( 'tx_googlequery_searchform_ss_q', options);
+
+			var socialfooter = {
+    "config": {
+        "links": [{
+            "classname": "facebook",
+            "text": "AU på Facebook",
+            "url": "https://www.facebook.com/UniAarhus"
+        }, {"classname": "twitter", "text": "AU på Twitter", "url": "https://twitter.com/AarhusUni"}, {
+            "classname": "linkedin",
+            "text": "AU på LinkedIn",
+            "url": "http://www.linkedin.com/company/aarhus-university-denmark-?trk=hb_tab_compy_id_4648"
+        }, {"classname": "youtube", "text": "AU på YouTube", "url": "http://www.youtube.com/user/AarhusUniversity"}],
+        "sharing": [],
+        "mode": "links",
+        "container": "#au_social_footer",
+        "tracking": "/virtual/social/globalfooter/",
+        "size": "small"
+    }
+};
+AU.social.sharers.push(socialfooter);
+    adding unit to database
+error in http://www.au.dk/index.php?id=410443&orgUrl=http%3A%2F%2Fwww.au.dk%2Fvidenudveksling%2Fsamarbejde-med-skoler-og-gymnasier%2F&uuid=f6b678e3-6099-493d-9318-ad3ef8abe118
+[8]attempting to scrape http://www.au.dk/index.php?id=376548&orgUrl=http%3A%2F%2Fwww.au.dk%2Fvidenudveksling%2Fefter-og-videreuddannelse%2F&uuid=9ac594e6-afed-46f2-b323-684601aff080
+Unit Found!! building unit data

@@ -5,19 +5,26 @@
 
 from html.parser import HTMLParser
 import re
+from Unit import Unit
 
 class parse(HTMLParser):
     
+    url = ""
+    unit = None
     isUnit = False
-    record_titles = False
-    record_desc = False
+    heading_tag_open = False
+    body_tag_open = False
+    
+    http_regex = re.compile("^http:", re.IGNORECASE)
+    heading_tag_regex = re.compile("^h\d$", re.IGNORECASE)    
+    unit_regex = re.compile("[a-z]{3,5}[0-9]{3,5}", re.IGNORECASE)
     
     def re_init(self, stack, visited):
         self.stack = stack
         self.visited = visited
     
-    def set_unit(self, unit):
-        self.unit = unit
+    def set_url(self, url):
+        self.url = url
            
     def setUnitTrue(self):
         self.isUnit = True
@@ -30,41 +37,39 @@ class parse(HTMLParser):
         return len(words)
     
     def handle_starttag(self, tag, attrs):
-        #print("here? tag is " + tag)
-        a = re.compile("^http:", re.IGNORECASE)
-        b = re.compile("^h\d$", re.IGNORECASE)
         if (tag == "a"):
-            #print("here2?")
             for name, value in attrs:
                 if name == "href":
                     if value not in self.visited:
-                        if a.match(value):
+                        if self.http_regex.match(value):
                             self.stack.push(value)
                         else:
-                            #print ("pushing " + "http:" + value) 
                             self.stack.push("http:" + value)
-        if (b.match(tag) and self.isUnit):
-            #print("found " + tag + " tag" )
-            self.record_titles = True
-        if (tag == "body" and self.isUnit):
-            self.record_desc = True
+        else:
+#            print("tag is " + tag)
+            if self.heading_tag_regex.match(tag):
+                self.heading_tag_open = True
+            elif tag == "body":
+                self.body_tag_open = True        
             
     def handle_endtag(self, tag):
-        b = re.compile("^h\d$", re.IGNORECASE)
-        if (b.match(tag) and self.isUnit):
-            self.record_titles = False
-        if (tag == "body"):
-            self.record_desc = False
-        
+        if self.heading_tag_regex.match(tag):
+                self.heading_tag_open = False 
+        elif tag == "body":
+            self.body_tag_open = True    
       
     def handle_data(self, data):
-        if(self.isUnit):
-            c = re.compile(self.unit.unitcode, re.IGNORECASE)
-            if (self.record_titles):
-                if (c.search(data)):
-                    self.unit.addTitle(data)
-            if (self.record_desc and self.count_words(data) > 10):
-                self.unit.addDescription(data) 
+        if self.heading_tag_open:
+            result = self.unit_regex.search(data)
+            if result:
+                self.unit = Unit(self.url)
+                self.isUnit = True
+                self.unit.add_unitcode(result.group(0))
+                self.unit.add_title(data)
+        if self.body_tag_open and self.isUnit:
+            if self.count_words(data) > 10:
+                self.unit.add_description(data)
+             
             
     
         
