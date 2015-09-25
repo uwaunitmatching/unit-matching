@@ -15,7 +15,8 @@ class parse(HTMLParser):
     heading_tag_open = False
     body_tag_open = False
     
-    http_regex = re.compile("^http:", re.IGNORECASE)
+    http_regex = re.compile("^http://", re.IGNORECASE)
+    slash_regex = re.compile("^/", re.IGNORECASE)
     heading_tag_regex = re.compile("^h\d$", re.IGNORECASE)    
     unit_regex = re.compile("[a-z]{3,5}[0-9]{3,5}", re.IGNORECASE)
     
@@ -36,6 +37,9 @@ class parse(HTMLParser):
         words = data.split()
         return len(words)
     
+    def get_domain(self):
+        return self.url.split('/')[2]
+    
     def handle_starttag(self, tag, attrs):
         if (tag == "a"):
             for name, value in attrs:
@@ -43,8 +47,12 @@ class parse(HTMLParser):
                     if value not in self.visited:
                         if self.http_regex.match(value):
                             self.stack.push(value)
-                        else:
-                            self.stack.push("http:" + value)
+#                            print("pushing " + value)
+                        elif self.slash_regex.match(value):
+                            self.stack.push("http://" + self.get_domain() + value)
+#                        else:
+#                            self.stack.push("http:" + value)
+#                            print("pushing " + "http:" + value)
         else:
 #            print("tag is " + tag)
             if self.heading_tag_regex.match(tag):
