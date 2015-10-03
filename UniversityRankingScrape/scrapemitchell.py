@@ -15,9 +15,32 @@ def get_proper_link(initlink ):
 
 	page = urllib.request.urlopen(portal_string)
 	soup = BeautifulSoup(page)
-
+	#Finds link to university homepage
 	homepage = soup.find('a', {"title" : "Click to visit the homepage"})['href']
-	return homepage
+
+	
+	table = soup.findAll('table', {"class" : "left-bdr rightbdr"})
+	#table2 = table.findAll('table', {"class" : "left-bdr rightbdr"})
+	i = 0
+	for data in table:
+		if i == 1:
+			#get the language via the webpage html structure			
+			rows = data.findAll("tr")
+			k = 0
+			for row in rows:
+				entry = row.findAll("td")
+				j = 0
+				if k == 1:
+					for td in entry:
+						if j == 3:
+							lang = td.get_text().strip()
+						j = j + 1
+				k = k + 1
+		i = i + 1
+	info = []
+	info.append(homepage)
+	info.append(lang)
+	return info
 
 
 
@@ -30,13 +53,13 @@ soup = BeautifulSoup(webpage)
 table= soup.find("table", { "class" : "bot-bdr"} )
 rows = table.findAll("tr")
 
-with open('out.csv', 'w', newline='') as fp:
+with open('out.csv', 'w', newline='') as fp: #Writes table contents to a .csv file
 	writer = csv.writer(fp, delimiter=',')
 	i = 0
 	for row in rows:
 		cells = row.findAll("td")
 		link = ""
-		proper = ""
+		proper = ["", ""]
 		if i != 0:
 			link = row.find('a', href=True)['href']
 			proper = get_proper_link(link)
@@ -59,6 +82,6 @@ with open('out.csv', 'w', newline='') as fp:
 					region = cell.get_text().strip()
 				j = j + 1
 		i = i + 1
-		data = [name, city, country, region, proper]
+		data = [name, city, country, region, proper[1], proper[0]]
 		writer.writerow(data)
-		print(link, name, city, country, region)
+		print(proper[0], name, city, 
