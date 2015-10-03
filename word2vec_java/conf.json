@@ -1,0 +1,101 @@
+{
+  "confs" : [ {
+    "lr" : 9.999999974752427E-7,
+    "numIterations" : 5,
+    "momentum" : 0.5,
+    "l2" : 2.0E-4,
+    "useRegularization" : true,
+    "momentumAfter" : null,
+    "maxNumLineSearchIterations" : 5,
+    "optimizationAlgo" : "CONJUGATE_GRADIENT",
+    "constrainGradientToUnitNorm" : false,
+    "rho" : 0.0,
+    "seed" : 123,
+    "stepFunction" : null,
+    "layer" : {
+      "RBM" : {
+        "activationFunction" : "relu",
+        "weightInit" : "XAVIER",
+        "biasInit" : 0.0,
+        "dist" : {
+          "normal" : {
+            "mean" : 0.001,
+            "std" : 1.0
+          }
+        },
+        "dropOut" : 0.5,
+        "updater" : "ADAGRAD",
+        "l1" : "NaN",
+        "l2" : "NaN",
+        "lr" : "NaN",
+        "lossFunction" : "RMSE_XENT",
+        "customLossFunction" : null,
+        "hiddenUnit" : "RECTIFIED",
+        "visibleUnit" : "GAUSSIAN",
+        "k" : 1,
+        "sparsity" : 0.0,
+        "nin" : 4,
+        "nout" : 3
+      }
+    },
+    "variables" : [ "W", "b", "vb" ],
+    "useDropConnect" : true,
+    "timeSeriesLength" : 1,
+    "batchSize" : 100,
+    "minimize" : false,
+    "l1" : 0.1,
+    "rmsDecay" : 0.95,
+    "miniBatch" : true
+  }, {
+    "lr" : 9.999999974752427E-7,
+    "numIterations" : 5,
+    "momentum" : 0.5,
+    "l2" : 2.0E-4,
+    "useRegularization" : true,
+    "momentumAfter" : null,
+    "maxNumLineSearchIterations" : 5,
+    "optimizationAlgo" : "CONJUGATE_GRADIENT",
+    "constrainGradientToUnitNorm" : false,
+    "rho" : 0.0,
+    "seed" : 123,
+    "stepFunction" : null,
+    "layer" : {
+      "output" : {
+        "activationFunction" : "softmax",
+        "weightInit" : "VI",
+        "biasInit" : 0.0,
+        "dist" : {
+          "normal" : {
+            "mean" : 0.001,
+            "std" : 1.0
+          }
+        },
+        "dropOut" : 0.0,
+        "updater" : "ADAGRAD",
+        "l1" : "NaN",
+        "l2" : "NaN",
+        "lr" : "NaN",
+        "lossFunction" : "MCXENT",
+        "customLossFunction" : null,
+        "nin" : 3,
+        "nout" : 3
+      }
+    },
+    "variables" : [ "W", "b" ],
+    "useDropConnect" : true,
+    "timeSeriesLength" : 1,
+    "batchSize" : 100,
+    "minimize" : false,
+    "l1" : 0.1,
+    "rmsDecay" : 0.95,
+    "miniBatch" : true
+  } ],
+  "pretrain" : true,
+  "dampingFactor" : 100.0,
+  "inputPreProcessors" : { },
+  "backprop" : false,
+  "backpropType" : "Standard",
+  "tbpttFwdLength" : 20,
+  "tbpttBackLength" : 20,
+  "redistributeParams" : false
+}
