@@ -1,28 +1,35 @@
 import goslate
 import urllib
-from bs4 import BeautifulSoup
+import re
 
-def translate(webpage):
-	soup = BeautifulSoup(webpage, "html.parser")
-	language = soup.find('lang')#, lang=True)['lang'] #main error is here
-	if language != 'en' or language is None:
-		go = goslate.Goslate()
-		translated = go.translate(webpage, 'en')
+#Written by Mitchell Poole
 
-		return translated
-	else:
+#Needs better Language detection
+def translateHTML(webpage):
+	reader = webpage.read().decode(encoding='UTF-8')
+	findLang = re.compile('lang="([a-z][a-z])" ', re.IGNORECASE)
+	lang = re.findall(findLang,reader)
+	print("FINDING")
+	#print(lang[0])
+
+	if(lang[0] == 'en'):
 		return webpage
+	else:
+		gs = goslate.Goslate(goslate.WRITING_NATIVE,timeout=30)
+		print("TRANSLATING...")
+		trans = gs.translate(reader, 'en', source_language=lang[0]) #LOOK UP AND SEE IF ENCODING ISSUE
+		return trans
 
 
 
-url = 'http://de.wikipedia.org/wiki/Wikipedia:Hauptseite'
+page = urllib.request.urlopen('http://el.wikipedia.org/')
 
 
-page = urllib.request.urlopen(url)
+second = urllib.request.urlopen('http://en.wikipedia.org/wiki/Main_Page')
+#print(second.read())
+#print(second)
 
+#Prints correct html
+#print(string.decode(encoding='UTF-8'))
 
-soup = BeautifulSoup(page, "html.parser")
-
-trans = translate(page)
-
-print(trans)
+f = translateHTML(page)
