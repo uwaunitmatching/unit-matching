@@ -2,6 +2,7 @@
 3 !Does not deal with relative links
 4 Need to find a way to access different domains from the same university
 5 push to stack before domain check
+7 REDIRECTS CAUSE DUAL ENTRIES IN DB
 6 This shit >>>
 
 7 Db config should be made user friendly
@@ -75,3 +76,7 @@ AU.social.sharers.push(socialfooter);
 error in http://www.au.dk/index.php?id=410443&orgUrl=http%3A%2F%2Fwww.au.dk%2Fvidenudveksling%2Fsamarbejde-med-skoler-og-gymnasier%2F&uuid=f6b678e3-6099-493d-9318-ad3ef8abe118
 [8]attempting to scrape http://www.au.dk/index.php?id=376548&orgUrl=http%3A%2F%2Fwww.au.dk%2Fvidenudveksling%2Fefter-og-videreuddannelse%2F&uuid=9ac594e6-afed-46f2-b323-684601aff080
 Unit Found!! building unit data
+
+BUG 3
+	lack of speces between words in unit desc
+		unit description is Physics of Heat and Physics of Waves, Basic Course 7.5 creditsThe aim of the course is to give basic knowledge in the area

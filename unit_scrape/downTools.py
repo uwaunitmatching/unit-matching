@@ -14,9 +14,10 @@ from Stack import Stack
 visited = set()
 #urls to visit
 stack = Stack()
+in_stack = set()
 #parser object to manipulate HTML
 parser = handleHTML.parse()
-parser.re_init(stack, visited)
+parser.re_init(stack, visited, in_stack)
 
 
 #recursively load URL via stack
@@ -24,9 +25,11 @@ parser.re_init(stack, visited)
 def recursiveload(url, dom):
     count = 0
     stack.push(url)
+    in_stack.add(url)
     while stack.isEmpty() != True:
         try:
             newurl = stack.pop()
+            in_stack.remove(newurl)
             if dom in newurl:
                 if newurl not in visited:
                     count = count + 1 
@@ -38,8 +41,7 @@ def recursiveload(url, dom):
 #load a single URL
 
 def loadUrl(url, count):
-    print("[" + str(count) + "]" + "attempting to scrape " + url)
-       
+    print("[" + str(count) + "]" + "[" + str(stack.size()) + "]" + "attempting to scrape " + url)
     try:
         file = urlopen(url)
     except URLError as e:
@@ -59,6 +61,7 @@ def loadUrl(url, count):
 def buildUnit(url, file):
     parser.setUnitFalse()
     visited.add(url)
+    parser.re_init(stack, visited, in_stack)
     parser.set_url(url)
     for line in file:
         parser.feed(line.decode('utf8'))
