@@ -27,11 +27,23 @@ finally:
 	f.close()
 
 
-for j in range(1,20):
+out = open('output_keywords.txt', 'w+')
+
+
+for j in range(0, len(desc)):
 	# print "%d. description: %s" % (j, desc[j])
-	print "ID: %s" % desc.keys()[j]
+	print "ID: %s\n" % desc.keys()[j]
 	keywords = rake_object.run(desc.values()[j])
-	print "Keywords:", keywords
+	out.write('ID: %s\n' % desc.keys()[j])
+	for keyword in keywords[0:(len(keywords) / 3)]:
+		# for k in keyword[0].split(" "):
+		# 	print "keyword: ", k
+		# 	out.write('%s\n' % k)
+		print "keyword: ", keyword[0]
+		out.write('%s,' % keyword[0])
+	out.write("%s\n" % keywords[len(keywords) / 3][0])
 
 
+
+out.close()
 
