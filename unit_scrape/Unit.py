@@ -5,6 +5,7 @@
 import re
 import MySQLdb
 import DBconfig
+from rake_uni import acceptBlobText 
 
 class Unit:
 
@@ -35,6 +36,8 @@ class Unit:
         self.description = self.description + unitDesc + " "
     
     def extract_keywords(self):
+        self.keywords = acceptBlobText(self.description)
+        print("        unit keywords are: " + self.keywords )
         
     #Add entry to database 
     def checkInfo(self):
