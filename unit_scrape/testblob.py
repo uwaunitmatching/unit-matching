@@ -1,0 +1,3 @@
+import blob
+
+print(blob.acceptBlobText("Level 3 core unit in the Computer Science; Data Science major sequences Category B broadening unit for Bachelor of Arts, Bachelor of Commerce and  Bachelor of Design students This unit teaches communication skills, an appreciation of the ethical and social implications of computing projects, and skills in project management and quality assurance. A number of lectures are given to introduce the principles of project management and the fundamental ethical and social principles involved in large-scale computing projects. The bulk of the unit is then taken up with a large group project, involving about six students per group. The project gives the students opportunities to practise va"))

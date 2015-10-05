@@ -5,7 +5,7 @@
 import re
 import MySQLdb
 import DBconfig
-from rake_uni import acceptBlobText 
+import blob
 
 class Unit:
 
@@ -36,7 +36,7 @@ class Unit:
         self.description = self.description + unitDesc + " "
     
     def extract_keywords(self):
-        self.keywords = acceptBlobText(self.description)
+        self.keywords = blob.acceptBlobText(self.description)
         print("        unit keywords are: " + self.keywords )
         
     #Add entry to database 
@@ -57,12 +57,10 @@ class Unit:
             cursor = database.cursor()
         except:
             print("Error connecting\n")
-        
-
+       
         try:
             cursor.execute(sql)
             database.commit()
         except:
             print("error!!\n")
         database.close();
-        

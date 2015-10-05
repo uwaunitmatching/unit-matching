@@ -1,4 +1,4 @@
-CREATE TABLE unit_list (unit_key INT NOT NULL auto_increment, sch_id INT, unit_code varchar(20),unit_name varchar(300),unit_desc varchar(5000),unit_text varchar(300),ISBN INT,FreeTags varchar(5000),Positive varchar(5000), unit_url varchar(2084), PRIMARY KEY (unit_key)) ENGINE = InnoDB;
+CREATE TABLE unit_list (unit_key INT NOT NULL auto_increment, sch_id INT, unit_code varchar(20),unit_name varchar(300),unit_desc varchar(5000),unit_text varchar(300),ISBN INT,FreeTags varchar(5000),Positive varchar(5000), unit_url varchar(2084), unit_keywords varchar(5000), PRIMARY KEY (unit_key)) ENGINE = InnoDB;
 
 
 
