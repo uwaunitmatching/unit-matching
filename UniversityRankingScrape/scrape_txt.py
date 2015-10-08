@@ -26,7 +26,13 @@ with open('qsranking.csv', 'w', newline='', encoding='utf-8') as fp:
 			if start:
 				if hasNoNumbers(line.strip()):
 					splitLine = line.split("\t")
-					nameList.append(splitLine[0])
+					name = splitLine[0]
+					nameLength = len(name)
+					splitLength = int(nameLength / 2)
+					if nameLength % 2 == 0 and name[:splitLength] == name[-splitLength:]:
+						nameList.append(name[:splitLength])
+					else :
+						nameList.append(name)
 				else:
 					if "." in line:
 						rankList.append(line.strip()[:-4])
