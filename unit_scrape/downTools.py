@@ -17,12 +17,12 @@ stack = Stack()
 in_stack = set()
 #parser object to manipulate HTML
 parser = handleHTML.parse()
-parser.re_init(stack, visited, in_stack)
+#parser.re_init(stack, visited, in_stack)
 
 
 #recursively load URL via stack
 
-def recursiveload(url, dom):
+def recursiveload(url, dom, db):
     count = 0
     stack.push(url)
     in_stack.add(url)
@@ -33,14 +33,14 @@ def recursiveload(url, dom):
             if dom in newurl:
                 if newurl not in visited:
                     count = count + 1 
-                    loadUrl(newurl, count)
+                    loadUrl(newurl, count, db)
         except:
             print("error in " + newurl)
             continue
                 
 #load a single URL
 
-def loadUrl(url, count):
+def loadUrl(url, count, db):
     print("[" + str(count) + "]" + "[" + str(stack.size()) + "]" + "attempting to scrape " + url)
     try:
         file = urlopen(url)
@@ -54,14 +54,14 @@ def loadUrl(url, count):
     else:
         visited.add(url)
         parser.setUnitFalse()
-        buildUnit(url, file)
+        buildUnit(url, file, db)
 
 #construct a table entry from unit web-page HTML
     
-def buildUnit(url, file):
+def buildUnit(url, file, db):
     parser.setUnitFalse()
     visited.add(url)
-    parser.re_init(stack, visited, in_stack)
+    parser.re_init(stack, visited, in_stack, db)
     parser.set_url(url)
     for line in file:
         parser.feed(line.decode('utf8'))

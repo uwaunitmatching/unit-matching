@@ -25,11 +25,12 @@ class parse(HTMLParser):
     heading_tag_regex = re.compile("^h\d$", re.IGNORECASE)    
     unit_regex = re.compile("[a-z]{2,5}[0-9]{3,5}", re.IGNORECASE)
     
-    def re_init(self, stack, visited, in_stack):
+    def re_init(self, stack, visited, in_stack, db):
         self.stack = stack
         self.visited = visited
         self.in_stack = in_stack
-        self.unit = Unit(self.url)
+        self.unit = Unit(self.url, db)
+
     
     def set_url(self, url):
         self.url = url

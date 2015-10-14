@@ -1,9 +1,8 @@
-1 Invalid html causes a webpage to be skipped entirely - should fix to process up to the error
+﻿1 Invalid html causes a webpage to be skipped entirely - should fix to process up to the error
 3 !Does not deal with relative links
 4 Need to find a way to access different domains from the same university
 5 push to stack before domain check
 7 REDIRECTS CAUSE DUAL ENTRIES IN DB
-6 This shit >>>
 
 7 Db config should be made user friendly
 
