@@ -11,6 +11,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import pymysql
 import unittest
+import other.scrape_universities
 
 #my functions
 import downTools
@@ -34,8 +35,11 @@ class Unit_Scrape_tk(tk.Frame):
         panel.pack(side="top")
         nb = ttk.Notebook(panel, name="notebook")
         nb.pack(side="bottom")
-        self.create_units_tab(nb)
         self.create_database_tab(nb)
+        self.create_university_tab(nb)
+        self.create_units_tab(nb)
+        
+        
 
 
 ### UNITS PANEL STARTS HERE
@@ -50,6 +54,7 @@ class Unit_Scrape_tk(tk.Frame):
 
     #callbacks
     def get_check_box_callback(self):
+        sys.stdout.write = redirector
         self.recursive = not self.recursive
         if (self.recursive):
             print("Recursive On")
@@ -57,10 +62,11 @@ class Unit_Scrape_tk(tk.Frame):
             print("Recursive Off")
     
     def get_url_callback(self):
-       try:
-           threading.Thread(target=confirm_input, args=(self.url_in.get(), self.recursive)).start()
-       except:
-           print ("Error: unable to start thread")
+        sys.stdout.write = redirector
+        try:
+            threading.Thread(target=confirm_input, args=(self.url_in.get(), self.recursive)).start()
+        except:
+            print ("Error: unable to start thread")
 
     def run_test_callback(self):
         print("running unit tests!")
@@ -78,8 +84,8 @@ class Unit_Scrape_tk(tk.Frame):
         self.url_in = tk.Entry(units_frame, width=150)
         self.url_in.focus_set()
         self.url_in.delete(0)
-        self.url_in.insert(0, "insert url here")
-        get_button = tk.Button(units_frame, text="get", width=10, command=self.get_url_callback)
+        self.url_in.insert(0, "Insert the URL of webpage containing unit information")
+        get_button = tk.Button(units_frame, text="Build unit data from URL", width=24, command=self.get_url_callback)
         get_button.pack(side="bottom", anchor="se")
         clear_button = tk.Button(units_frame, text="clear log", width=10, command=self.clear_log_callback)
         clear_button.pack(side="bottom", anchor="se")
@@ -119,11 +125,39 @@ class Unit_Scrape_tk(tk.Frame):
             self.test_label.delete(0, 'end')
             self.test_label.insert(0, "connection failed!")
 
+    def loadSQL(self):
+        fd = open('other/remake.sql', 'r')
+        sqlFile = fd.read()
+        fd.close()
+        return sqlFile.split(';')
+
+    def build_db_callback(self):
+        sql = self.loadSQL()
+        for command in sql:
+            command = command + ";"
+            print(command)
+            try:
+                
+                database = pymysql.connect(db.getIP(), db.getUser(), db.getPW(), db.getDBname() )
+                cursor = database.cursor()
+            except:
+                print("error connecting")
+            try:
+                cursor.execute(command)
+            except:
+                pass
+            try:
+                database.commit()
+                database.close();
+            except:
+                pass
+            
         
     #input/output
     
     def create_database_tab(self, nb):
         db_frame = tk.Frame(nb, name="database")
+
         #boxes
         self.IP_in = tk.Entry(db_frame, width=100)
         self.IP_in.delete(0)
@@ -143,27 +177,56 @@ class Unit_Scrape_tk(tk.Frame):
         password_label = tk.Label(db_frame, text="password")
         database_label = tk.Label(db_frame, text="database name")
         #pack
-        IP_label.pack(side="top")
-        self.IP_in.pack(side="top")
-        user_label.pack(side="top")
-        self.user_in.pack(side="top")
-        password_label.pack(side="top")
-        self.password_in.pack(side="top")
-        database_label.pack(side="top")
-        self.database_name_in.pack(side="top")
-        nb.add(db_frame, text="database")
+        
+        IP_label.pack(side="top", anchor = "center")
+        self.IP_in.pack(side="top", anchor = "center")
+        user_label.pack(side="top", anchor = "center")
+        self.user_in.pack(side="top", anchor = "center")
+        password_label.pack(side="top", anchor = "center")
+        self.password_in.pack(side="top", anchor = "center")
+        database_label.pack(side="top", anchor = "center")
+        self.database_name_in.pack(side="top", anchor = "center")
         #update button
         update_button = tk.Button(db_frame, text="update", width=10, command=self.get_db_update_callback)
-        
         #test_button
         self.test_label = tk.Entry(db_frame, width = 30)
         self.test_label.delete(0)
         self.test_label.insert(0, "untested")
         test_button = tk.Button(db_frame, text="test connection", width=15, command=self.test_connect_callback)
-        self.test_label.pack(side="bottom")
-        test_button.pack(side="bottom")
-        update_button.pack(side="bottom")
+        update_button.pack(side="top", anchor = "center")
+        test_button.pack(side="top", anchor = "center")
+        self.test_label.pack(side="top", anchor = "center")
 
+        build_db_label = tk.Label(db_frame, text="drop exisiting tables and rebuild !USE WITH CAUTION!")
+        build_db_button = tk.Button(db_frame, text="rebuild database tables", width=25, command=self.build_db_callback)
+        build_db_button.pack(side = "bottom", anchor = "center")
+        build_db_label.pack(side = "bottom", anchor = "center")                         
+
+        #add frame
+        nb.add(db_frame, text="database")
+
+        
+
+##UNIVERSITY TAB STARTS HERE
+    #callbacks
+    def scrape_uni_callback(self):
+        sys.stdout.write = redirector2
+        threading.Thread(target=other.scrape_universities.downUnis, args=(db, 0)).start()
+        
+        
+    def create_university_tab(self, nb):
+        uni_frame = tk.Frame(nb, name="unis")
+        #scrape uni's button
+        self.scrape_uni_button = tk.Button(uni_frame, text="Build University Database", width=24, command=self.scrape_uni_callback)
+        self.scrape_uni_button.pack(side="bottom", anchor = "e")
+        #output
+        self.text_out_uni = tk.Text(uni_frame, width=150)
+        self.text_out_uni.pack(side="bottom")
+
+        #add frame
+        nb.add(uni_frame, text="University")
+
+        
 
 
 ## RUN PROGRAM
@@ -173,8 +236,13 @@ root = tk.Tk()
 root.title("Unit Scrape")
 app = Unit_Scrape_tk(master=root)
 
+def redirector2(inputStr):
+    app.text_out_uni.insert(tk.INSERT, inputStr)
+    app.text_out_uni.yview('end')
+
 def redirector(inputStr):
     app.text_out.insert(tk.INSERT, inputStr)
+    app.text_out.yview('end')
 
 def null_redir(inputStr):
     pass

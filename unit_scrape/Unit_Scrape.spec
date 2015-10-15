@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['Unit_Scrape.py'],
-             pathex=['C:\\Users\\adria\\Desktop\\CITS3200_unit_matching\\unit_scrape'],
+             pathex=['C:\\Users\\adria\\Desktop\\Reclone\\unit_scrape'],
              binaries=None,
              datas=None,
              hiddenimports=[],

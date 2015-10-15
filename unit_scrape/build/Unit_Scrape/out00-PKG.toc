@@ -1,4 +1,4 @@
-('C:\\Users\\adria\\Desktop\\CITS3200_unit_matching\\unit_scrape\\build\\Unit_Scrape\\out00-PKG.pkg',
+('C:\\Users\\adria\\Desktop\\Reclone\\unit_scrape\\build\\Unit_Scrape\\out00-PKG.pkg',
  {'BINARY': 1,
   'DATA': 1,
   'EXECUTABLE': 1,
@@ -6,7 +6,7 @@
   'PYMODULE': 1,
   'PYSOURCE': 1,
   'PYZ': 0},
- [('out00-PYZ.pyz', 'C:\\Users\\adria\\Desktop\\CITS3200_unit_matching\\unit_scrape\\build\\Unit_Scrape\\out00-PYZ.pyz', 'PYZ'), ('struct', 'C:\\Python34\\lib\\struct.pyo', 'PYMODULE'), ('pyimod01_os_path', 'C:\\Python34\\lib\\site-packages\\PyInstaller\\loader\\pyimod01_os_path.pyc', 'PYMODULE'), ('pyimod02_archive', 'C:\\Python34\\lib\\site-packages\\PyInstaller\\loader\\pyimod02_archive.pyc', 'PYMODULE'), ('pyimod03_importers', 'C:\\Python34\\lib\\site-packages\\PyInstaller\\loader\\pyimod03_importers.pyc', 'PYMODULE'), ('pyiboot01_bootstrap', 'C:\\Python34\\lib\\site-packages\\PyInstaller\\loader\\pyiboot01_bootstrap.py', 'PYSOURCE'), ('pyi_rth__tkinter', 'C:\\Python34\\lib\\site-packages\\PyInstaller\\loader\\rthooks\\pyi_rth__tkinter.py', 'PYSOURCE'), ('Unit_Scrape', 'C:\\Users\\adria\\Desktop\\CITS3200_unit_matching\\unit_scrape\\Unit_Scrape.py', 'PYSOURCE'), ('unit_scrape.exe.manifest', 'C:\\Users\\adria\\Desktop\\CITS3200_unit_matching\\unit_scrape\\build\\Unit_Scrape\\Unit_Scrape.exe.manifest', 'BINARY')],
+ [('out00-PYZ.pyz', 'C:\\Users\\adria\\Desktop\\Reclone\\unit_scrape\\build\\Unit_Scrape\\out00-PYZ.pyz', 'PYZ'), ('struct', 'C:\\Python34\\lib\\struct.pyo', 'PYMODULE'), ('pyimod01_os_path', 'C:\\Python34\\lib\\site-packages\\PyInstaller\\loader\\pyimod01_os_path.pyc', 'PYMODULE'), ('pyimod02_archive', 'C:\\Python34\\lib\\site-packages\\PyInstaller\\loader\\pyimod02_archive.pyc', 'PYMODULE'), ('pyimod03_importers', 'C:\\Python34\\lib\\site-packages\\PyInstaller\\loader\\pyimod03_importers.pyc', 'PYMODULE'), ('pyiboot01_bootstrap', 'C:\\Python34\\lib\\site-packages\\PyInstaller\\loader\\pyiboot01_bootstrap.py', 'PYSOURCE'), ('pyi_rth__tkinter', 'C:\\Python34\\lib\\site-packages\\PyInstaller\\loader\\rthooks\\pyi_rth__tkinter.py', 'PYSOURCE'), ('Unit_Scrape', 'C:\\Users\\adria\\Desktop\\Reclone\\unit_scrape\\Unit_Scrape.py', 'PYSOURCE'), ('unit_scrape.exe.manifest', 'C:\\Users\\adria\\Desktop\\Reclone\\unit_scrape\\build\\Unit_Scrape\\Unit_Scrape.exe.manifest', 'BINARY')],
  True,
  None,
  False)
